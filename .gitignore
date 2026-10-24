@@ -1,0 +1,58 @@
+# ---- 操作系统 ----
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ---- 编辑器 / IDE ----
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ---- 构建与打包产物（Release 由 GitHub Actions 生成，不进仓库）----
+dist/
+release/
+build/
+out/
+*.zip
+*.crx
+*.xpi
+*.pem
+*.p12
+
+# ---- 日志与临时文件 ----
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# ---- 依赖与工具缓存（本项目无构建，仅防误提交）----
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+.yarn/
+.cache/
+
+# ---- 本地环境 / 密钥（绝不提交）----
+.env
+.env.*
+*.key
+*.keystore
+secrets.json
+
+# ---- 测试与截图草稿（按需保留正式素材）----
+*.local
+.notes/
