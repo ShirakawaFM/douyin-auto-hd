@@ -1,0 +1,106 @@
+name: 🐞 Bug 报告
+description: 扩展失效、画质识别错误、脚本报错等
+title: "[Bug] "
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请尽量填写完整，尤其是控制台日志 —— 抖音改版导致的失效几乎都要靠 `[抖音HD] scan` 输出来定位。
+
+  - type: input
+    id: version
+    attributes:
+      label: 扩展版本
+      description: 弹窗顶部显示的 `vX.Y.Z`，或 `manifest.json` 里的 `version`
+      placeholder: "2.4.3"
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: 浏览器与系统
+      placeholder: "Chrome 141.0.7390.55 / Windows 11 23H2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: page-type
+    attributes:
+      label: 页面类型
+      options:
+        - 普通视频页（/video/...）
+        - 直播
+        - 用户主页
+        - 搜索 / 推荐流
+        - 其他或不确定
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target
+    attributes:
+      label: 目标清晰度设置
+      options:
+        - 最高（默认）
+        - 4K
+        - 2K/1440P
+        - 1080P
+        - 720P
+        - 标清 (540P)
+        - 已关闭自动切换
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 从打开页面到出问题的完整操作
+      placeholder: |
+        1. 打开 https://www.douyin.com/video/7xxxxxxxxxx
+        2. 等待播放
+        3. ...
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+      placeholder: 期望自动切换到 1080P
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+      description: 画质没变 / 切错档位 / 弹窗报错 / 页面抽搐等
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 控制台日志
+      description: |
+        抖音页面按 `F12` → Console → 过滤 `抖音HD` → 复制完整输出。
+        **重点保留 `qualityTexts` 字段**（它记录菜单里真实的画质文案）。
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 已使用最新版本，并刷新过抖音页面
+          required: true
+        - label: 已搜索现有 Issue，确认不是重复问题
+          required: true
+        - label: 已尝试将 douyin.com 加入广告拦截扩展白名单
+          required: false

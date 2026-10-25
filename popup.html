@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>抖音自动最高画质</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">▶</div>
+      <div class="header-text">
+        <h1>抖音自动最高画质</h1>
+        <div class="subtitle-row">
+          <span class="tag">Manifest V3</span>
+          <span class="sep">｜</span>
+          <span class="tag">最小权限</span>
+          <span class="sep">｜</span>
+          <span class="version" id="version"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="row between">
+        <div>
+          <div class="label">自动切画质</div>
+          <div class="sub">视频加载后自动切换</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="enabled" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="label">目标清晰度</div>
+      <div class="sub">切换至该档位及以下最高可用画质</div>
+      <div class="select-wrap" id="selectWrap">
+        <button class="select-trigger" id="selectTrigger" type="button">
+          <span id="selectValue">最高（默认）</span>
+        </button>
+        <div class="select-menu" id="selectMenu"></div>
+      </div>
+    </section>
+
+    <section class="card log-card">
+      <div class="row between log-header">
+        <span class="label">切换日志</span>
+        <button class="btn-reset" id="resetBtn">重置</button>
+      </div>
+      <div class="hint" id="hint" hidden></div>
+      <div class="log-list" id="logList">
+        <div class="log-empty">暂无记录</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

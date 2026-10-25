@@ -1,0 +1,104 @@
+name: Validate extension
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate manifest, scripts and package layout
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate manifest.json
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+
+            const raw = fs.readFileSync("manifest.json", "utf8");
+            const m = JSON.parse(raw);
+
+            if (m.manifest_version !== 3) throw new Error("manifest_version must be 3");
+            for (const key of ["name", "version", "description", "permissions", "host_permissions", "content_scripts", "action"]) {
+              if (!(key in m)) throw new Error("manifest.json is missing required key: " + key);
+            }
+            if (!/^\d+(\.\d+){1,3}$/.test(m.version)) throw new Error("invalid version: " + m.version);
+            if (!Array.isArray(m.content_scripts) || m.content_scripts.length === 0) {
+              throw new Error("content_scripts must be a non-empty array");
+            }
+            for (const cs of m.content_scripts) {
+              if (!/^https:\/\//.test(String(cs.matches?.[0] ?? ""))) {
+                throw new Error("content_scripts matches must be https only");
+              }
+            }
+
+            // Every file referenced by the manifest must exist in the repo.
+            const referenced = [
+              ...(m.content_scripts ?? []).flatMap((cs) => [...(cs.js ?? []), ...(cs.css ?? [])]),
+              m.action?.default_popup,
+              ...Object.values(m.icons ?? {}),
+              ...Object.values(m.action?.default_icon ?? {}),
+            ].filter(Boolean);
+
+            for (const file of referenced) {
+              if (!fs.existsSync(file)) throw new Error("manifest references a missing file: " + file);
+            }
+
+            console.log("manifest.json OK — " + m.name + " v" + m.version);
+            console.log("referenced files OK: " + referenced.join(", "));
+          '
+
+      - name: Check JavaScript syntax
+        run: |
+          set -euo pipefail
+          for f in $(git ls-files '*.js'); do
+            node --check "$f"
+            echo "syntax OK: $f"
+          done
+
+      - name: Check HTML assets resolve
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+
+            const html = fs.readFileSync("popup.html", "utf8");
+            const refs = [...html.matchAll(/(?:src|href)="([^"#]+)"/g)].map((m) => m[1]);
+            for (const ref of refs) {
+              if (/^(https?:)?\/\//.test(ref)) continue;
+              if (!fs.existsSync(ref)) throw new Error("popup.html references a missing file: " + ref);
+            }
+            console.log("popup.html assets OK: " + refs.join(", "));
+          '
+
+      - name: Keep README version badges in sync (warning only)
+        run: |
+          VERSION="$(node -p "require('./manifest.json').version")"
+          for readme in README.md README_EN.md; do
+            if grep -q "badge/version-${VERSION}-" "$readme"; then
+              echo "$readme badge matches v$VERSION"
+            else
+              echo "::warning file=$readme::README version badge does not match manifest v$VERSION"
+            fi
+          done
+
+      - name: Refuse packaged artifacts in the repository
+        run: |
+          set -euo pipefail
+          if git ls-files '*.zip' '*.crx' '*.pem' | grep -q .; then
+            echo "::error::Do not commit packaged artifacts (*.zip / *.crx / *.pem). Releases are built by CI."
+            git ls-files '*.zip' '*.crx' '*.pem'
+            exit 1
+          fi
+          echo "no packaged artifacts committed"

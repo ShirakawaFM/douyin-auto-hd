@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "抖音网页版自动最高画质",
+  "version": "2.4.3",
+  "description": "访问抖音网页版时，自动将视频切换为当前可用的最高画质（4K > 2160P > 1080P > 720P）。仅使用最小权限。",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*.douyin.com/*",
+    "https://douyin.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.douyin.com/*",
+        "https://douyin.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "抖音自动最高画质"
+  }
+}

@@ -1,0 +1,31 @@
+# 让 Git 正确识别文本/二进制，并统一换行，避免 Windows 与 macOS/Linux 协作时整文件 diff。
+* text=auto
+
+# 代码与文档统一使用 LF（浏览器扩展对换行不敏感，统一后 diff 更干净）
+*.js      text eol=lf
+*.css     text eol=lf
+*.html    text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.txt     text eol=lf
+
+# Windows 脚本保留 CRLF
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+*.ps1     text eol=crlf
+
+# 二进制资源不做换行转换
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.webp    binary
+*.ico     binary
+*.zip     binary
+*.crx     binary
+*.pem     binary
+
+# 发布产物不在 diff 中显示
+*.zip     -diff
