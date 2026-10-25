@@ -1,0 +1,14 @@
+flowchart TD
+    A[Page load / SPA video switch] --> B[Scan trigger: MutationObserver / video events / 5s poll]
+    B --> C{Main video found?}
+    C -- No --> B
+    C -- Yes --> D{Live stream?}
+    D -- Yes --> E[Skip, log live state]
+    D -- No --> F[Find quality trigger by text → read current quality]
+    F --> G[Scan the whole document for quality options, including hidden ones]
+    G --> H[Sort by score, apply ceiling, dedupe]
+    H --> I{Already optimal?}
+    I -- Yes --> B
+    I -- No --> J[Simulate click on the best option]
+    J --> K[Re-read quality after 250ms, write log]
+    K --> B

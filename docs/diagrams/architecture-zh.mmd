@@ -1,0 +1,8 @@
+flowchart LR
+    subgraph Browser[浏览器]
+        P[popup.html / popup.js] -- "chrome.storage.local<br/>保存 enabled / target" --> S[(扩展存储)]
+        P -- "chrome.tabs.sendMessage<br/>GET_STATUS / SET_ENABLED / RESET" --> C[content.js]
+        C -- "sendResponse<br/>状态 + 日志" --> P
+        S -- "chrome.storage.onChanged" --> C
+    end
+    C --> D[抖音网页版 DOM / video 元素]
