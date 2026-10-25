@@ -1,0 +1,91 @@
+name: Release
+
+# 触发方式：推送形如 v2.4.3 的 tag
+#   git tag -a v2.4.3 -m "v2.4.3"
+#   git push origin v2.4.3
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish extension zip
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify tag matches manifest version
+        id: version
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME#v}"
+          MANIFEST_VERSION="$(node -p "require('./manifest.json').version")"
+          echo "tag=${TAG} manifest=${MANIFEST_VERSION}"
+          if [ "$TAG" != "$MANIFEST_VERSION" ]; then
+            echo "::error::Tag v${TAG} does not match manifest.json version ${MANIFEST_VERSION}. Bump manifest.json first."
+            exit 1
+          fi
+          echo "version=${MANIFEST_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Validate before packaging
+        run: |
+          set -euo pipefail
+          for f in $(git ls-files '*.js'); do node --check "$f"; done
+          node -e "JSON.parse(require('fs').readFileSync('manifest.json','utf8'))"
+          echo "validation passed"
+
+      - name: Build extension package
+        run: |
+          set -euo pipefail
+          NAME="douyin-auto-hd"
+          VERSION="${{ steps.version.outputs.version }}"
+          OUT="dist"
+
+          mkdir -p "${OUT}/${NAME}"
+          cp manifest.json content.js popup.html popup.css popup.js "${OUT}/${NAME}/"
+          cp README.md README_EN.md LICENSE CHANGELOG.md "${OUT}/${NAME}/"
+
+          (cd "${OUT}" && zip -r -9 "${NAME}-v${VERSION}.zip" "${NAME}" > /dev/null)
+          (cd "${OUT}" && sha256sum "${NAME}-v${VERSION}.zip" > SHA256SUMS.txt)
+
+          echo "--- package contents ---"
+          unzip -l "${OUT}/${NAME}-v${VERSION}.zip"
+          echo "--- dist ---"
+          ls -lh "${OUT}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "v${{ steps.version.outputs.version }}"
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            dist/douyin-auto-hd-v*.zip
+            dist/SHA256SUMS.txt
+          body: |
+            ## 抖音网页版 · 自动最高画质 v${{ steps.version.outputs.version }}
+
+            ### 安装 / Install
+            1. 下载下方 `douyin-auto-hd-v${{ steps.version.outputs.version }}.zip` 并解压；
+            2. 打开 `chrome://extensions/`（或 `edge://extensions/`），开启开发者模式；
+            3. 点击「加载已解压的扩展程序」，选择解压后包含 `manifest.json` 的目录；
+            4. 刷新抖音页面。
+
+            Download the zip below, extract it, then load the extracted folder as an unpacked extension
+            in `chrome://extensions/` (Developer mode). Reload the Douyin tab afterwards.
+
+            ### 校验 / Verify
+            `SHA256SUMS.txt` 包含压缩包的 SHA-256，可用 `certutil -hashfile <file> SHA256` 校验。
+
+            > 完整变更请见 [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md)。
