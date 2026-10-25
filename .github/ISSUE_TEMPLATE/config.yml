@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📖 使用与安装说明
+    url: https://github.com/ShirakawaFM/douyin-auto-hd#安装
+    about: 安装步骤、弹窗说明、权限解释都在 README 里
+  - name: ❓ 常见问题 FAQ
+    url: https://github.com/ShirakawaFM/douyin-auto-hd#常见问题-faq
+    about: 没反应、画质没变、提示未响应等问题请先看 FAQ
+  - name: 🔐 安全问题 / Security
+    url: https://github.com/ShirakawaFM/douyin-auto-hd/security/advisories/new
+    about: 请通过私密渠道报告安全问题，不要公开提交 Issue
