@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="34" viewBox="0 0 1280 34" role="img" aria-label="分隔线">
+  <defs>
+    <linearGradient id="dl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF2E63" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#FF2E63" stop-opacity="0.5"/>
+      <stop offset="0.65" stop-color="#22D3EE" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF2E63" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFE3EC" stop-opacity="1"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="16" width="1280" height="1.5" fill="url(#dl)"/>
+  <rect x="-170" y="15" width="170" height="3.5" fill="url(#dt)">
+    <animate attributeName="x" values="-170;1280" dur="4.2s" repeatCount="indefinite"/>
+  </rect>
+  <g transform="translate(640 16)">
+    <circle r="11" fill="#07070D" stroke="#FF2E63" stroke-width="1.2" opacity="0.9"/>
+    <path d="M-3 -5 L7 0 L-3 5 Z" fill="#FF2E63"/>
+    <circle r="16" fill="none" stroke="#22D3EE" stroke-width="1" opacity="0.4">
+      <animate attributeName="r" values="12;20;12" dur="3.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

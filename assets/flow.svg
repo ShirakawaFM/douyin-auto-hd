@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="自动切换流程：观察视频 → 读当前画质 → 扫描候选 → 排序取最高 → 点击 → 复读校验 → 写日志">
+  <title>自动切换流程</title>
+  <defs>
+    <linearGradient id="fbg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07070D"/>
+      <stop offset="1" stop-color="#0B0714"/>
+    </linearGradient>
+    <linearGradient id="n1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF2E63"/><stop offset="1" stop-color="#6B1030"/></linearGradient>
+    <linearGradient id="n2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF6E93"/><stop offset="1" stop-color="#6B1F38"/></linearGradient>
+    <linearGradient id="n3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#0F4A57"/></linearGradient>
+    <linearGradient id="n4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A78BFA"/><stop offset="1" stop-color="#3B2A6B"/></linearGradient>
+    <linearGradient id="n5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC46B"/><stop offset="1" stop-color="#6B4710"/></linearGradient>
+  </defs>
+
+  <rect width="1280" height="420" fill="url(#fbg4)"/>
+  <rect width="1280" height="420" fill="none" stroke="#241C38" stroke-width="2"/>
+
+  <text x="36" y="38" fill="#FF6E93" font-family="Consolas, monospace" font-size="14" letter-spacing="4">SWITCH LOOP / 一次切换约 0.5 秒</text>
+  <text x="1244" y="38" text-anchor="end" fill="#4A4159" font-family="Consolas, monospace" font-size="12">不改网络请求 · 不注入远程代码 · 不绕过会员</text>
+
+  <g font-family="'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <g>
+      <rect x="36" y="62" width="272" height="112" rx="14" fill="#0C0916" stroke="#2A2140"/>
+      <rect x="36" y="62" width="4" height="112" rx="2" fill="url(#n1)"/>
+      <rect x="36" y="62" width="272" height="112" rx="14" fill="none" stroke="#FF2E63" stroke-width="1.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.1;0.85;0.1" dur="7s" repeatCount="indefinite"/>
+      </rect>
+      <text x="58" y="94" fill="#6E6383" font-family="Consolas, monospace" font-size="12">01</text>
+      <text x="58" y="124" fill="#F6EEF8" font-size="18" font-weight="700">盯住 &lt;video&gt;</text>
+      <text x="58" y="148" fill="#8C82A0" font-size="13">MutationObserver + 每 5 秒巡检</text>
+    </g>
+
+    <g>
+      <rect x="348" y="62" width="272" height="112" rx="14" fill="#0C0916" stroke="#2A2140"/>
+      <rect x="348" y="62" width="4" height="112" rx="2" fill="url(#n2)"/>
+      <rect x="348" y="62" width="272" height="112" rx="14" fill="none" stroke="#FF6E93" stroke-width="1.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.1;0.85;0.1" dur="7s" begin="0.9s" repeatCount="indefinite"/>
+      </rect>
+      <text x="370" y="94" fill="#6E6383" font-family="Consolas, monospace" font-size="12">02</text>
+      <text x="370" y="124" fill="#F6EEF8" font-size="18" font-weight="700">读当前画质</text>
+      <text x="370" y="148" fill="#8C82A0" font-size="13">只认「播放器正选中」的那一档</text>
+    </g>
+
+    <g>
+      <rect x="660" y="62" width="272" height="112" rx="14" fill="#0C0916" stroke="#2A2140"/>
+      <rect x="660" y="62" width="4" height="112" rx="2" fill="url(#n3)"/>
+      <rect x="660" y="62" width="272" height="112" rx="14" fill="none" stroke="#22D3EE" stroke-width="1.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.1;0.85;0.1" dur="7s" begin="1.8s" repeatCount="indefinite"/>
+      </rect>
+      <text x="682" y="94" fill="#6E6383" font-family="Consolas, monospace" font-size="12">03</text>
+      <text x="682" y="124" fill="#F6EEF8" font-size="18" font-weight="700">扫描可见文本</text>
+      <text x="682" y="148" fill="#8C82A0" font-size="13">叶子节点 + 正则锚定，零 class</text>
+    </g>
+
+    <g>
+      <rect x="972" y="62" width="272" height="112" rx="14" fill="#0C0916" stroke="#2A2140"/>
+      <rect x="972" y="62" width="4" height="112" rx="2" fill="url(#n4)"/>
+      <rect x="972" y="62" width="272" height="112" rx="14" fill="none" stroke="#A78BFA" stroke-width="1.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.1;0.85;0.1" dur="7s" begin="2.7s" repeatCount="indefinite"/>
+      </rect>
+      <text x="994" y="94" fill="#6E6383" font-family="Consolas, monospace" font-size="12">04</text>
+      <text x="994" y="124" fill="#F6EEF8" font-size="18" font-weight="700">排序取最高</text>
+      <text x="994" y="148" fill="#8C82A0" font-size="13">再按弹窗里的「目标上限」截断</text>
+    </g>
+
+    <g>
+      <rect x="972" y="246" width="272" height="112" rx="14" fill="#0C0916" stroke="#2A2140"/>
+      <rect x="972" y="246" width="4" height="112" rx="2" fill="url(#n5)"/>
+      <rect x="972" y="246" width="272" height="112" rx="14" fill="none" stroke="#FFC46B" stroke-width="1.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.1;0.85;0.1" dur="7s" begin="3.6s" repeatCount="indefinite"/>
+      </rect>
+      <text x="994" y="278" fill="#6E6383" font-family="Consolas, monospace" font-size="12">05</text>
+      <text x="994" y="308" fill="#F6EEF8" font-size="18" font-weight="700">模拟点击</text>
+      <text x="994" y="332" fill="#8C82A0" font-size="13">派发真实鼠标事件，不是改 DOM 值</text>
+    </g>
+
+    <g>
+      <rect x="660" y="246" width="272" height="112" rx="14" fill="#0C0916" stroke="#2A2140"/>
+      <rect x="660" y="246" width="4" height="112" rx="2" fill="url(#n3)"/>
+      <rect x="660" y="246" width="272" height="112" rx="14" fill="none" stroke="#22D3EE" stroke-width="1.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.1;0.85;0.1" dur="7s" begin="4.5s" repeatCount="indefinite"/>
+      </rect>
+      <text x="682" y="278" fill="#6E6383" font-family="Consolas, monospace" font-size="12">06</text>
+      <text x="682" y="308" fill="#F6EEF8" font-size="18" font-weight="700">复读校验</text>
+      <text x="682" y="332" fill="#8C82A0" font-size="13">再读一次真实画质，不信任界面反馈</text>
+    </g>
+
+    <g>
+      <rect x="348" y="246" width="272" height="112" rx="14" fill="#0C0916" stroke="#2A2140"/>
+      <rect x="348" y="246" width="4" height="112" rx="2" fill="url(#n2)"/>
+      <rect x="348" y="246" width="272" height="112" rx="14" fill="none" stroke="#FF6E93" stroke-width="1.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.1;0.85;0.1" dur="7s" begin="5.4s" repeatCount="indefinite"/>
+      </rect>
+      <text x="370" y="278" fill="#6E6383" font-family="Consolas, monospace" font-size="12">07</text>
+      <text x="370" y="308" fill="#F6EEF8" font-size="18" font-weight="700">写日志 + 存储</text>
+      <text x="370" y="332" fill="#8C82A0" font-size="13">弹窗里 50 条，storage.local 记住开关</text>
+    </g>
+
+    <g>
+      <rect x="36" y="246" width="272" height="112" rx="14" fill="#0A0A12" stroke="#33284A" stroke-dasharray="7 6"/>
+      <text x="58" y="278" fill="#6E6383" font-family="Consolas, monospace" font-size="12">GUARD</text>
+      <text x="58" y="308" fill="#C9BBD6" font-size="18" font-weight="700">防抖 · 失败节流</text>
+      <text x="58" y="332" fill="#7E7392" font-size="13">500ms 内不重复尝试，失败不硬刚</text>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#3A2A55" stroke-width="2" stroke-dasharray="7 6">
+    <animate attributeName="stroke-dashoffset" values="0;-52" dur="2.4s" repeatCount="indefinite"/>
+    <path d="M308 118 H344"/>
+    <path d="M620 118 H656"/>
+    <path d="M932 118 H968"/>
+    <path d="M1108 174 V242"/>
+    <path d="M968 302 H936"/>
+    <path d="M656 302 H624"/>
+    <path d="M344 302 H312"/>
+  </g>
+  <g fill="#FF2E63">
+    <path d="M344 112 L354 118 L344 124 Z"/>
+    <path d="M656 112 L666 118 L656 124 Z"/>
+    <path d="M968 112 L978 118 L968 124 Z"/>
+    <path d="M1102 242 L1108 252 L1114 242 Z"/>
+    <path d="M936 296 L926 302 L936 308 Z"/>
+    <path d="M624 296 L614 302 L624 308 Z"/>
+    <path d="M312 296 L302 302 L312 308 Z"/>
+  </g>
+
+  <text x="36" y="398" fill="#4A4159" font-family="Consolas, monospace" font-size="12">SPA 换视频时重置缓存重新走一遍 · 直播直接跳过 · 弹窗关掉开关即完全停止</text>
+</svg>

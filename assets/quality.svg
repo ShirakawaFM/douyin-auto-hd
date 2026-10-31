@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="330" viewBox="0 0 1280 330" role="img" aria-label="画质档位阶梯：自动选当前可用的最高一档">
+  <title>画质阶梯</title>
+  <defs>
+    <linearGradient id="qbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07070D"/>
+      <stop offset="1" stop-color="#0B0714"/>
+    </linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF2E63"/>
+      <stop offset="0.6" stop-color="#FF6E93"/>
+      <stop offset="1" stop-color="#FFC46B"/>
+    </linearGradient>
+    <linearGradient id="rest" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2B2440"/>
+      <stop offset="1" stop-color="#3A2F55"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="topClip"><rect x="0" y="0" width="1280" height="330"/></clipPath>
+  </defs>
+
+  <rect width="1280" height="330" fill="url(#qbg)"/>
+  <rect width="1280" height="330" fill="none" stroke="#241C38" stroke-width="2"/>
+
+  <text x="40" y="30" fill="#FF6E93" font-family="Consolas, monospace" font-size="14" letter-spacing="4">QUALITY LADDER / 只往高处走，不往下掉</text>
+  <text x="1240" y="30" text-anchor="end" fill="#5E526F" font-family="Consolas, monospace" font-size="12">4K &gt; 2160P &gt; 2K &gt; 1080P &gt; 720P &gt; 540P &gt; 360P</text>
+
+  <g font-family="'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <g>
+      <text x="40" y="70" fill="#FF9BB2" font-size="15" font-weight="700">4K / 2160P</text>
+      <rect x="176" y="52" width="700" height="24" rx="12" fill="url(#top)"/>
+      <g clip-path="url(#topClip)">
+        <rect x="176" y="52" width="120" height="24" fill="url(#shine)" opacity="0.5">
+          <animate attributeName="x" values="120;900" dur="3.6s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+      <rect x="176" y="52" width="700" height="24" rx="12" fill="none" stroke="#FF8FA8" stroke-opacity="0.5">
+        <animate attributeName="stroke-opacity" values="0.2;0.8;0.2" dur="2.4s" repeatCount="indefinite"/>
+      </rect>
+      <text x="196" y="70" fill="#2A0713" font-family="Consolas, monospace" font-size="13" font-weight="700">2160p</text>
+      <text x="270" y="70" fill="#2A0713" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="700">自动选这里</text>
+    </g>
+
+    <g>
+      <text x="40" y="112" fill="#9A8FB0" font-size="14">2K / 1440P</text>
+      <rect x="176" y="96" width="466" height="20" rx="10" fill="url(#rest)"/>
+      <text x="656" y="112" fill="#6E6383" font-family="Consolas, monospace" font-size="12">1440p</text>
+    </g>
+
+    <g>
+      <text x="40" y="152" fill="#9A8FB0" font-size="14">蓝光 / 1080P</text>
+      <rect x="176" y="136" width="350" height="20" rx="10" fill="url(#rest)"/>
+      <text x="540" y="152" fill="#6E6383" font-family="Consolas, monospace" font-size="12">1080p</text>
+    </g>
+
+    <g>
+      <text x="40" y="192" fill="#8C82A0" font-size="14">高清 / 720P</text>
+      <rect x="176" y="176" width="233" height="20" rx="10" fill="url(#rest)"/>
+      <text x="423" y="192" fill="#5E526F" font-family="Consolas, monospace" font-size="12">720p</text>
+    </g>
+
+    <g>
+      <text x="40" y="232" fill="#7E7392" font-size="14">标清 / 540P</text>
+      <rect x="176" y="216" width="175" height="20" rx="10" fill="url(#rest)"/>
+      <text x="365" y="232" fill="#544A66" font-family="Consolas, monospace" font-size="12">540p</text>
+    </g>
+
+    <g>
+      <text x="40" y="272" fill="#6E6383" font-size="14">流畅 / 360P</text>
+      <rect x="176" y="256" width="117" height="20" rx="10" fill="url(#rest)"/>
+      <text x="307" y="272" fill="#4A4159" font-family="Consolas, monospace" font-size="12">360p</text>
+    </g>
+  </g>
+
+  <g transform="translate(906 44)">
+    <rect x="0" y="0" width="286" height="44" rx="12" fill="#170E1F" stroke="#7A2440"/>
+    <circle cx="22" cy="22" r="5" fill="#FF2E63">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <text x="38" y="20" fill="#FFD8E4" font-family="'PingFang SC', sans-serif" font-size="14" font-weight="700">目标上限：最高</text>
+    <text x="38" y="36" fill="#8C82A0" font-family="'PingFang SC', sans-serif" font-size="11">弹窗里可改成 4K / 2K / 1080P / 720P / 540P</text>
+  </g>
+
+  <g transform="translate(906 104)">
+    <rect x="0" y="0" width="286" height="96" rx="12" fill="#100C18" stroke="#2A2140"/>
+    <text x="16" y="24" fill="#6E6383" font-family="'PingFang SC', sans-serif" font-size="11">手点低于最高档时会先问你</text>
+    <rect x="16" y="38" width="120" height="30" rx="8" fill="#22D3EE" fill-opacity="0.12" stroke="#22D3EE" stroke-opacity="0.4"/>
+    <text x="38" y="58" fill="#9AE6F2" font-family="'PingFang SC', sans-serif" font-size="13">仍然切换</text>
+    <rect x="150" y="38" width="120" height="30" rx="8" fill="#FF2E63" fill-opacity="0.14" stroke="#FF2E63" stroke-opacity="0.45"/>
+    <text x="172" y="58" fill="#FFB3C6" font-family="'PingFang SC', sans-serif" font-size="13">保持最高</text>
+    <text x="16" y="88" fill="#5E526F" font-family="Consolas, monospace" font-size="10">CONFIRM BEFORE DOWNGRADE</text>
+  </g>
+
+  <text x="40" y="312" fill="#4A4159" font-family="Consolas, monospace" font-size="12">直播自动跳过全部画质逻辑 · 弹窗里关掉总开关即完全停止 · 不改网络请求，不绕过会员限制</text>
+</svg>
