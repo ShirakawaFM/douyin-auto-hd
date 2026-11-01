@@ -1,7 +1,7 @@
 # 发布与维护手册 · Publishing Guide
 
-本手册带你从「一堆本地文件」走到「GitHub 上可被别人安装、可被搜索引擎搜到、有 Release 压缩包」的开源项目。
-所有命令默认在 **Windows PowerShell** 下执行，macOS / Linux 把路径换掉即可。
+这份手册管的事只有一件：把一堆本地文件，变成一个别人能装上、能被搜到、有 Release 包的开源项目。
+命令默认在 **Windows PowerShell** 下执行，macOS / Linux 把路径换掉就行。
 
 > 环境参考：本仓库首次发布时使用 **Git 2.56 + Node.js 24 + Windows 11 PowerShell**。
 > 如果你的终端提示找不到 `git`，先执行第 1 步。

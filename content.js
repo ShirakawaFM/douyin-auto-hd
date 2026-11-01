@@ -722,7 +722,15 @@
   function saveConfig() {
     try {
       if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.local) return;
-      chrome.storage.local.set({ [CONFIG_KEY]: { enabled: config.enabled } });
+      // 整个对象覆盖写会把 popup 设的 target 一起抹掉：{enabled} 写进去，
+      // storage 里只剩 enabled，下次打开弹窗「目标清晰度」就回落到最高。
+      chrome.storage.local.get(CONFIG_KEY, (res) => {
+        if (chrome.runtime.lastError) return;
+        const prev = (res && res[CONFIG_KEY]) || {};
+        chrome.storage.local.set({
+          [CONFIG_KEY]: { ...prev, enabled: config.enabled, target: config.target || 'max' },
+        });
+      });
     } catch (e) {}
   }
 
